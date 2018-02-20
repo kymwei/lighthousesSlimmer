@@ -1,0 +1,12 @@
+{
+    "extends": "lighthouse:default",
+    "settings": {
+        
+      "onlyCategories": ["performance", "pwa", "best-practices","seo"]
+    },
+    "categories": {
+      "performance": {
+        "weight": 1
+      }
+    }
+  }
