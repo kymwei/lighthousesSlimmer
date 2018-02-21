@@ -12,4 +12,4 @@
 ## TODO:
 * have tempory graph output for exist files
 * push to Splunk to have data storage 
-* use lamda to run instances?? 
+* use lambda to run instances ???
