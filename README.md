@@ -13,3 +13,7 @@
 * have tempory graph output for exist files
 * push to Splunk to have data storage 
 * use lambda to run instances ???
+
+
+
+## npm start
