@@ -1,9 +1,29 @@
 {
     "extends": "lighthouse:default",
     "settings": {
-        
+      "skipAudits": [
+        "no-mutation-events",
+        "screenshot-thumbnails",
+        "first-meaningful-paint",
+        "first-interactive",
+        "consistently-interactive",
+        "estimated-input-latency",
+        "speed-index-metric",
+        "offscreen-images",
+        "load-fast-enough-for-pwa"
+      ],        
       "onlyCategories": ["performance", "pwa", "best-practices","seo"]
     },
+    "passes": [
+      {
+        "passName": "defaultPass",
+        "useThrottling": false,
+        "pauseAfterLoadMs": 0,
+        "networkQuietThresholdMs": 500,
+        "cpuQuietThresholdMs": 500,
+        "gatherers": []
+      }
+    ],
     "categories": {
       "performance": {
         "weight": 1
