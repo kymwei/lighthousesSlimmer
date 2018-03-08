@@ -5,7 +5,6 @@ const config = require('./config');
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const postSplunk = require('./postToSplunk');
 var getDirName = require('path').dirname;
 
 
@@ -50,28 +49,22 @@ async function asyncFuncs() {
 
 
 var writeToFile = (slimmerResult) => {
-  fs.writeFile(config.directory + '/performanceMatrix'+ new Date().toISOString().split('T')[0] + '.json', JSON.stringify(slimmerResult), function (err) {
+  fs.writeFile(config.directory + '\\performanceMatrix'+ new Date().toISOString().split('T')[0] + '.json', JSON.stringify(slimmerResult), function (err) {
     if (err) {
       return console.log(err);
   }
   console.log("The file saved!");
   });
 }
-
 asyncFuncs().then( async (UrlList) => {
   let slimmerResult = [];
   for (let page of config.urlList) {
     let r = await launchChromeAndRunLighthouse(page.url, opts, perfConfig);
     let slimmer = slimmerMatrix(r, page);
-    
-    //post to splunk
-    let splunkPost = new postSplunk(slimmer);
-    splunkPost.postIt();
     slimmerResult.push(slimmer);
   }
   return slimmerResult;
 }).then(slimmerResult => {
-  //save to file
   if(fs.existsSync(config.directory)){
     writeToFile(slimmerResult);
   }else{
@@ -81,8 +74,7 @@ asyncFuncs().then( async (UrlList) => {
     });
   }
 
- //console.log(slimmerResult);
- }).catch(err => {
-   console.log(err);
- })
-
+  console.log(slimmerResult);
+}).catch(err => {
+  console.log(err);
+})
